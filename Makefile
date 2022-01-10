@@ -6,7 +6,7 @@
 #    By: orekabe <orekabe@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 15:37:42 by orekabe           #+#    #+#              #
-#    Updated: 2021/12/22 02:33:39 by orekabe          ###   ########.fr        #
+#    Updated: 2022/01/10 05:12:17 by orekabe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,9 @@ NAME = libftprintf.a
 HEADER = ft_printf.h
 
 SRC =	ft_printf.c ft_putchar.c ft_putstr.c ft_putnbr.c ft_puthex.c ft_putaddress.c \
-		ft_conversion.c ft_check_after_percentage.c ft_check_flags2.c ft_check_specifier.c \
-		ft_check_hash.c ft_check_plus.c ft_check_decimal.c ft_check_hexa.c
+		ft_conversion1.c ft_conversion2.c ft_check_after_percentage.c ft_check_flags2.c ft_check_specifier.c \
+		ft_check_hash.c ft_check_plus.c ft_check_decimal.c ft_check_hexa.c ft_check_flags1.c \
+		ft_atoi.c ft_putnchar.c ft_putnstr.c 
 
 OBJ = $(SRC:.c=.o)
 

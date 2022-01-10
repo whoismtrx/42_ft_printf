@@ -6,13 +6,13 @@
 /*   By: orekabe <orekabe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 17:11:34 by orekabe           #+#    #+#             */
-/*   Updated: 2021/12/16 18:50:36 by orekabe          ###   ########.fr       */
+/*   Updated: 2022/01/10 05:13:12 by orekabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putstr(char *str)
+int	ft_putstr(const char *str)
 {
 	int	i;
 
