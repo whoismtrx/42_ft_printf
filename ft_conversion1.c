@@ -6,7 +6,7 @@
 /*   By: orekabe <orekabe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 03:29:17 by orekabe           #+#    #+#             */
-/*   Updated: 2022/01/10 21:30:21 by orekabe          ###   ########.fr       */
+/*   Updated: 2022/01/11 03:40:46 by orekabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ int	ft_conversion1(const char *format, int size, va_list ptr, t_flags flags)
 	else if (format[i] == 'p')
 		size += ft_putaddress(va_arg(ptr, unsigned long));
 	else if (format[i] == 'd' || format[i] == 'i')
-		size += ft_putnbr(va_arg(ptr, int));
+		size += ft_putnnbr(va_arg(ptr, int), flags);
 	else if (format[i] == 'u')
-		size += ft_putnbr(va_arg(ptr, unsigned int));
+		size += ft_putnnbr(va_arg(ptr, unsigned int), flags);
 	else if (format[i] == 'x' || format[i] == 'X')
-		size += ft_puthex(va_arg(ptr, unsigned int), format[i]);
+		size += ft_putnhex(va_arg(ptr, unsigned int), format[i], flags);
 	else if (format[i] == '%')
 		size += ft_putchar('%');
 	return (size);

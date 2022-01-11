@@ -1,35 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_puthex.c                                        :+:      :+:    :+:   */
+/*   ft_check_flags.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: orekabe <orekabe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/13 17:44:02 by orekabe           #+#    #+#             */
-/*   Updated: 2022/01/11 04:15:31 by orekabe          ###   ########.fr       */
+/*   Created: 2022/01/11 05:04:52 by orekabe           #+#    #+#             */
+/*   Updated: 2022/01/11 05:06:01 by orekabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_puthex(unsigned long n, char c)
+int	ft_check_flags(char c)
 {
-	int		size;
-	char	*hex;
-
-	size = 0;
-	hex = "0123456789abcdef";
-	if (n < 16)
-	{
-		if (c == 'X' && n > 9)
-			size += ft_putchar(hex[n] - 32);
-		else
-			size += ft_putchar(hex[n]);
-	}
-	else
-	{
-		size += ft_puthex(n / 16, c);
-		size += ft_puthex(n % 16, c);
-	}
-	return (size);
+	if (c == '-' || c == '.' || c == '0')
+		return (1);
+	if (c == '+' || c == ' ' || c == '#')
+		return (1);
+	return (0);
 }

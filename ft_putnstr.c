@@ -6,13 +6,13 @@
 /*   By: orekabe <orekabe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 04:55:09 by orekabe           #+#    #+#             */
-/*   Updated: 2022/01/11 01:04:17 by orekabe          ###   ########.fr       */
+/*   Updated: 2022/01/11 03:16:08 by orekabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static t_flags ft_get_width(t_flags flags, const char *str)
+static t_flags	ft_get_width_s(t_flags flags, const char *str)
 {
 	if (flags.dot)
 	{
@@ -54,7 +54,7 @@ int	ft_putnstr(const char *str, t_flags flags)
 		size += write(1, "(null)", 6);
 	else
 	{
-		flags = ft_get_width(flags, str);
+		flags = ft_get_width_s(flags, str);
 		if (!flags.minus)
 		{
 			while (flags.width-- > 0)

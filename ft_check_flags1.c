@@ -6,7 +6,7 @@
 /*   By: orekabe <orekabe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 21:17:23 by orekabe           #+#    #+#             */
-/*   Updated: 2022/01/10 23:30:52 by orekabe          ###   ########.fr       */
+/*   Updated: 2022/01/11 03:14:43 by orekabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ t_flags	ft_check_flags1(const char *format, t_flags flags)
 		flags.dot = 1;
 		flags.zero = 1;
 	}
-	if ((format[i] >= '0' && format[i] <= '9') && format[i - 1] != '.' && !flags.width)
+	if ((format[i] >= '0' && format[i] <= '9') && format[i - 1] != '.'
+		&& !flags.width)
 		flags.width = ft_atoi(&format[i]);
 	if ((format[i] >= '0' && format[i] <= '9') && format[i - 1] == '.')
 		flags.precision = ft_atoi(&format[i]);

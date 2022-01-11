@@ -1,8 +1,7 @@
-#include <stdio.h>
 #include "ft_printf.h"
 
 int main()
 {
-	ft_printf("|%.10s|", NULL);
-	printf("\n|%.10s|", NULL);
+	ft_printf("%c", 'a');
+	printf("\n%c", 'a');
 }
