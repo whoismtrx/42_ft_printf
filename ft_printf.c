@@ -6,7 +6,7 @@
 /*   By: orekabe <orekabe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 14:24:48 by orekabe           #+#    #+#             */
-/*   Updated: 2022/01/10 04:36:09 by orekabe          ###   ########.fr       */
+/*   Updated: 2022/01/10 21:14:36 by orekabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	ft_print1(const char *format, int size, va_list ptr, t_flags flags)
 	i = 0;
 	if (ft_check_specifier(format[i]))
 	{
-		size += ft_conversion1(&format[i], ptr, flags);
+		size += ft_conversion1(&format[i], size, ptr, flags);
 	}
 	return (size);
 }

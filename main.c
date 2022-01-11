@@ -3,6 +3,6 @@
 
 int main()
 {
-	ft_printf("|%10s|", "Mitirix");
-	printf("\n|%10s|", "Mitirix");
+	ft_printf("|%.10s|", NULL);
+	printf("\n|%.10s|", NULL);
 }

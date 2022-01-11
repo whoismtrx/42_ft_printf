@@ -6,7 +6,7 @@
 /*   By: orekabe <orekabe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 17:38:15 by orekabe           #+#    #+#             */
-/*   Updated: 2022/01/10 05:13:33 by orekabe          ###   ########.fr       */
+/*   Updated: 2022/01/10 21:30:13 by orekabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_flags
 }				t_flags;
 
 int		ft_printf(const char *format, ...);
-int		ft_conversion1(const char *format, va_list ptr, t_flags flags);
+int		ft_conversion1(const char *format, int size, va_list ptr, t_flags flags);
 int		ft_conversion2(const char *format, va_list ptr);
 int		ft_check_after_percentage(const char *format, va_list ptr);
 t_flags	ft_check_flags1(const char *format, t_flags flags);
@@ -46,5 +46,6 @@ int		ft_putaddress(unsigned long n);
 int		ft_putnchar(char c, t_flags flags);
 int		ft_putnstr(const char *str, t_flags flags);
 int		ft_atoi(const char *str);
+int		ft_strlen(const char *s);
 
 #endif

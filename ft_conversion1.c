@@ -6,19 +6,17 @@
 /*   By: orekabe <orekabe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 03:29:17 by orekabe           #+#    #+#             */
-/*   Updated: 2022/01/10 05:55:55 by orekabe          ###   ########.fr       */
+/*   Updated: 2022/01/10 21:30:21 by orekabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_conversion1(const char *format, va_list ptr, t_flags flags)
+int	ft_conversion1(const char *format, int size, va_list ptr, t_flags flags)
 {
 	int		i;
-	int		size;
 
 	i = 0;
-	size = 0;
 	if (format[i] == 'c')
 		size += ft_putnchar(va_arg(ptr, int), flags);
 	else if (format[i] == 's')
