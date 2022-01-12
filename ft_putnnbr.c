@@ -6,7 +6,7 @@
 /*   By: orekabe <orekabe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 01:16:53 by orekabe           #+#    #+#             */
-/*   Updated: 2022/01/12 05:58:37 by orekabe          ###   ########.fr       */
+/*   Updated: 2022/01/12 06:49:30 by orekabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static int	ft_putlennbr(long long n, int precision)
 	return (size);
 }
 
-static int	ft_putlennbr0(long long n, int precision, int len)
+static int	ft_putlennbr0(long long n, int precision)
 {
 	int	size;
 	int	zero;
@@ -100,9 +100,12 @@ static int	ft_putlennbr0(long long n, int precision, int len)
 		n *= -1;
 		size += ft_putchar('-');
 	}
-	if (precision > len)
+	if (precision > ft_count_len(n))
 	{
-		zero = precision - len;
+		if (n == 0)
+			zero = precision - (ft_count_len(n) - 1);
+		else
+			zero = precision;
 		while (zero--)
 			size += ft_putchar('0');
 	}
@@ -121,22 +124,24 @@ static int	ft_putlennbr0(long long n, int precision, int len)
 int	ft_putnnbr(long long n, t_flags flags)
 {
 	int	size;
-	int	len;
+	int	boool;
 	
 	size = 0;
-	len = 0;
+	boool = 1;
 	flags = ft_get_width_n(flags, n);
-	size += ft_fill_after(flags);
+	if (boool == 1 && (!flags.minus))
+	{
+		size += ft_fill(flags);
+		boool = 0;
+	}
 	if (flags.dot && n != 0)
 		size += ft_putlennbr(n, flags.precision);
 	else if (flags.dot && n == 0)
-		size += ft_putlennbr0(n, flags.precision, len);
+		size += ft_putlennbr0(n, flags.precision);
 	else
 		size += ft_putnbr(n);
-	if (flags.minus)
-	{
-		while (flags.width-- > 0)
-			size += ft_putchar(' ');
-	}
+	if (boool == 1 && (flags.minus))
+		size += ft_fill(flags);
+		
 	return (size);
 }
