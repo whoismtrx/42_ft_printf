@@ -6,7 +6,7 @@
 /*   By: orekabe <orekabe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 17:38:15 by orekabe           #+#    #+#             */
-/*   Updated: 2022/01/11 05:06:39 by orekabe          ###   ########.fr       */
+/*   Updated: 2022/01/12 05:58:10 by orekabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ int		ft_putaddress(unsigned long n);
 int		ft_putnchar(char c, t_flags flags);
 int		ft_putnstr(const char *str, t_flags flags);
 int		ft_putnnbr(long long n, t_flags flags);
+int		ft_putunbr(long long n, t_flags flags);
 int		ft_putnhex(unsigned long n, char c, t_flags flags);
+int		ft_putnadd(unsigned long n, char c, t_flags flags);
+int		ft_fill(t_flags flags);
 int		ft_atoi(const char *str);
 int		ft_strlen(const char *s);
 

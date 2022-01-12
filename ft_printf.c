@@ -6,30 +6,43 @@
 /*   By: orekabe <orekabe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 14:24:48 by orekabe           #+#    #+#             */
-/*   Updated: 2022/01/11 05:45:35 by orekabe          ###   ########.fr       */
+/*   Updated: 2022/01/11 19:27:48 by orekabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_print1(const char *format, int size, va_list ptr, t_flags flags)
+static t_flags ft_initialise_to_0(t_flags flags)
+{
+	flags.dot = 0;
+	flags.minus = 0;
+	flags.zero = 0;
+	flags.width = 0;
+	flags.precision = 0;
+	flags.flags1 = 0;
+	return (flags);
+}
+
+static int	ft_print1(const char *format, va_list ptr, t_flags flags)
 {
 	int		i;
-	va_list	temp;
+	int		size;
 
 	i = 0;
+	size = 0;
 	if (ft_check_specifier(format[i]))
-	{
-		va_copy(temp, ptr);
 		size += ft_conversion1(&format[i], size, ptr, flags);
-	}
 	return (size);
 }
 
-static int	ft_print2(const char *format, int i, int size, va_list ptr)
+static int	ft_print2(const char *format, va_list ptr)
 {
+	int		i;
+	int		size;
 	va_list	temp;
 
+	i = 0;
+	size = 0;
 	if (ft_check_specifier(format[i]))
 	{
 		va_copy(temp, ptr);
@@ -52,7 +65,8 @@ static int	ft_print(const char *format, int i, int size, va_list ptr)
 		if (format[i] == '%')
 		{
 			i++;
-			while (ft_check_flags(format[i]))
+			flags = ft_initialise_to_0(flags);
+			while (!ft_check_specifier(format[i]))
 			{
 				flags = ft_check_flags1(&format[i], flags);
 				i++;
@@ -60,16 +74,17 @@ static int	ft_print(const char *format, int i, int size, va_list ptr)
 			if (ft_check_specifier(format[i]))
 			{
 				if (flags.flags1 == 1)
-					size += ft_print1(&format[i], size, ptr, flags);
+					size += ft_print1(&format[i], ptr, flags);
 				else
-					size += ft_print2(&format[i], i, size, ptr);
+					size += ft_print2(&format[i], ptr);
 			}
+			else
+				size += ft_putchar(format[i]);
 		}
 		else
 			size += ft_putchar(format[i]);
 		i++;
 	}
-	va_end(ptr);
 	return (size);
 }
 

@@ -1,33 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnchar.c                                      :+:      :+:    :+:   */
+/*   ft_fill.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: orekabe <orekabe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/10 04:26:12 by orekabe           #+#    #+#             */
-/*   Updated: 2022/01/12 02:05:26 by orekabe          ###   ########.fr       */
+/*   Created: 2022/01/12 05:52:27 by orekabe           #+#    #+#             */
+/*   Updated: 2022/01/12 05:57:54 by orekabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putnchar(char c, t_flags flags)
+int	ft_fill(t_flags flags)
 {
 	int	size;
 
 	size = 0;
-	flags.width = flags.width - 1;
-	if (!flags.minus)
+	if (!flags.minus && !flags.zero)
 	{
 		while (flags.width-- > 0)
 			size += ft_putchar(' ');
 	}
-	size += ft_putchar(c);
-	if (flags.minus)
+	else if (!flags.minus && flags.zero)
+	{
+		while (flags.width-- > 0)
+			size += ft_putchar('0');
+	}
+	else if (flags.minus && !flags.zero)
 	{
 		while (flags.width-- > 0)
 			size += ft_putchar(' ');
+	}
+	else if (flags.minus && flags.zero)
+	{
+		while (flags.width-- > 0)
+			size += ft_putchar('0');
 	}
 	return (size);
 }

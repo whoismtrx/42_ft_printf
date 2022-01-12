@@ -6,7 +6,7 @@
 /*   By: orekabe <orekabe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 19:05:29 by orekabe           #+#    #+#             */
-/*   Updated: 2022/01/10 21:01:22 by orekabe          ###   ########.fr       */
+/*   Updated: 2022/01/11 18:24:46 by orekabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_strlen(const char *s)
 	int	i;
 
 	i = 0;
+	if (!s)
+		return (6);
 	while (s[i] != '\0')
 		i++;
 	return (i);

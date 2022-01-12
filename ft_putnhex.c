@@ -6,7 +6,7 @@
 /*   By: orekabe <orekabe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 03:39:46 by orekabe           #+#    #+#             */
-/*   Updated: 2022/01/11 04:58:15 by orekabe          ###   ########.fr       */
+/*   Updated: 2022/01/12 05:17:50 by orekabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,16 @@ static	int	ft_count_lenhex(unsigned long n)
 	
 	len = 0;
 	nbr = n;
+	if (n >= 0 && n <= 16)
+	{
+		len++;
+		return (len);
+	}
 	while (nbr > 0)
 	{
 		nbr /= 16;
 		len++;
-		if (nbr >= 0 && nbr <= 9)
+		if (nbr >= 0 && nbr < 16)
 		{
 			len++;
 			return (len);
@@ -32,40 +37,29 @@ static	int	ft_count_lenhex(unsigned long n)
 	return (0);
 }
 
-static t_flags	ft_get_width_h(t_flags flags, int len)
+static t_flags	ft_get_width_h(t_flags flags, unsigned long n)
 {
+	int	old_width;
+	
+	old_width = flags.width;
 	if (flags.dot)
 	{
-		if (flags.precision < len)
-			flags.width = flags.width - len;
+		if (flags.precision < ft_count_lenhex(n) && flags.precision > 0)
+			flags.width = flags.width - ft_count_lenhex(n);
 		else
 			flags.width = flags.width - flags.precision;
 	}
-	else
-	{
-		if (flags.width < len)
-			flags.width = 0;
-		else
-			flags.width = flags.width - len;
-	}
+	if (flags.width < ft_count_lenhex(n) && old_width < ft_count_lenhex(n))
+		flags.width = 0;
+	else if (flags.width >= ft_count_lenhex(n) && n == 0 && flags.dot && flags.precision >= ft_count_lenhex(n))
+		flags.width -= 1;
+	else if (flags.width >= ft_count_lenhex(n) && n == 0 && !flags.dot)
+		flags.width -= 1;
+	else if (!flags.dot && n != 0)
+		flags.width = flags.width - ft_count_lenhex(n);
+	else if (flags.width == ft_count_lenhex(n))
+		flags.width = 0;
 	return (flags);
-}
-
-static int	ft_get_len_hex(unsigned long n)
-{
-	int		len;
-	char	*hex;
-
-	len = 0;
-	hex = "0123456789abcdef";
-	if (n < 16)
-		len++;
-	else
-	{
-		n += ft_get_len_hex(n / 16);
-		n += ft_get_len_hex(n % 16);
-	}
-	return (len);
 }
 
 static int	ft_putlenhex(unsigned long n, char c, int precision)
@@ -78,7 +72,7 @@ static int	ft_putlenhex(unsigned long n, char c, int precision)
 	hex = "0123456789abcdef";
 	if (precision > ft_count_lenhex(n))
 	{
-		zero = precision - ft_get_len_hex(n);
+		zero = precision - ft_count_lenhex(n);
 		while (zero--)
 			size += ft_putchar('0');
 	}
@@ -103,16 +97,20 @@ int	ft_putnhex(unsigned long n, char c, t_flags flags)
 	unsigned int	len;
 
 	size = 0;
-	len = ft_get_len_hex(n);
-	flags = ft_get_width_h(flags, len);
+	len = ft_count_lenhex(n);
+	flags = ft_get_width_h(flags, n);
 	if (!flags.minus)
 	{
 		while (flags.width-- > 0)
 			size += ft_putchar(' ');
 	}
-	if (flags.dot)
+	if (flags.dot && flags.precision > 0)
 		size += ft_putlenhex(n, c, flags.precision);
-	else
+	else if (flags.dot && flags.precision == 0 && n == 0 && !flags.width && !flags.minus)
+		return (0);
+	else if (n != 0)
+		size += ft_puthex(n, c);
+	else if (!flags.dot && n == 0)
 		size += ft_puthex(n, c);
 	if (flags.minus)
 	{
