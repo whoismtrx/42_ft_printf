@@ -6,7 +6,7 @@
 /*   By: orekabe <orekabe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 05:52:27 by orekabe           #+#    #+#             */
-/*   Updated: 2022/01/12 06:22:54 by orekabe          ###   ########.fr       */
+/*   Updated: 2022/01/12 23:36:36 by orekabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,18 @@ static int	ft_fill_before(t_flags flags)
 	int	size;
 
 	size = 0;
-	if (!flags.minus && flags.zero)
+	printf("%d\n", flags.precision);
+	if (!flags.minus && flags.zero && flags.precision > 0)
 	{
 		while (flags.width-- > 0)
 			size += ft_putchar('0');
 	}
-	else if (!flags.minus && !flags.zero)
+	else if (!flags.minus && flags.zero && !flags.dot)
+	{
+		while (flags.width-- > 0)
+			size += ft_putchar('0');
+	}
+	else if (!flags.minus && (!flags.zero || !flags.precision))
 	{
 		while (flags.width-- > 0)
 			size += ft_putchar(' ');

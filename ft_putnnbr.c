@@ -6,7 +6,7 @@
 /*   By: orekabe <orekabe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 01:16:53 by orekabe           #+#    #+#             */
-/*   Updated: 2022/01/12 06:49:30 by orekabe          ###   ########.fr       */
+/*   Updated: 2022/01/12 23:19:46 by orekabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ static t_flags	ft_get_width_n(t_flags flags, long long n)
 	{
 		if (flags.precision < ft_count_len(n) && flags.precision > 0)
 			flags.width = flags.width - ft_count_len(n);
+		else if (flags.width == ft_count_len(n) && n != 0)
+			flags.width = 0;
 		else
 			flags.width = flags.width - flags.precision;
 	}
@@ -67,10 +69,7 @@ static int	ft_putlennbr(long long n, int precision)
 
 	size = 0;
 	if (n < 0)
-	{
 		n *= -1;
-		size += ft_putchar('-');
-	}
 	if (precision > ft_count_len(n))
 	{
 		zero = precision - ft_count_len(n);
@@ -96,11 +95,8 @@ static int	ft_putlennbr0(long long n, int precision)
 
 	size = 0;
 	if (n < 0)
-	{
 		n *= -1;
-		size += ft_putchar('-');
-	}
-	if (precision > ft_count_len(n))
+	if (precision >= ft_count_len(n))
 	{
 		if (n == 0)
 			zero = precision - (ft_count_len(n) - 1);
@@ -129,6 +125,11 @@ int	ft_putnnbr(long long n, t_flags flags)
 	size = 0;
 	boool = 1;
 	flags = ft_get_width_n(flags, n);
+	if (n < 0 && flags.zero)
+	{
+		size += ft_putchar('-');
+		n *= -1;
+	}
 	if (boool == 1 && (!flags.minus))
 	{
 		size += ft_fill(flags);
