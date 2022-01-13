@@ -6,7 +6,7 @@
 /*   By: orekabe <orekabe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 05:52:27 by orekabe           #+#    #+#             */
-/*   Updated: 2022/01/13 05:56:16 by orekabe          ###   ########.fr       */
+/*   Updated: 2022/01/13 23:10:27 by orekabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,46 @@ int	ft_fill_space(t_flags flags, long long n)
 	int	size;
 
 	size = 0;
-	if (!flags.minus)
+	if (!flags.minus && ft_count_len(n) > flags.precision)
 	{
-		printf("%d\n", flags.width);
-		if (flags.zero)
+		if (flags.zero && n != 0)
 		{
-			while (flags.width-- > 0 && n != 0)
+			while (flags.width-- > ft_count_len(n))
 				size += ft_putchar('0');
 		}
-		while (flags.width-- > 0)
+		else if (flags.zero && flags.dot && n == 0 && !flags.precision)
+		{
+			while (flags.width-- > 0)
 				size += ft_putchar(' ');
+		}
+		while (flags.width-- > ft_count_len(n))
+			size += ft_putchar(' ');
+	}
+	else if (!flags.minus && ft_count_len(n) < flags.precision)
+	{
+		if (flags.zero && n != 0)
+		{
+			while (flags.width-- > flags.precision)
+				size += ft_putchar('0');
+		}
+		else if (flags.zero && flags.dot && n == 0 && !flags.precision)
+		{
+			while (flags.width-- > 0)
+				size += ft_putchar(' ');
+		}
+		while (flags.width-- > flags.precision)
+			size += ft_putchar(' ');
 	}
 	else if (flags.minus)
 	{
-		while (flags.width-- > 0)
+		if (n == 0 && flags.dot)
+		{
+			while (flags.width-- > flags.precision)
+			size += ft_putchar(' ');
+		}
+		if (flags.precision == ft_count_len(n) && n < 1)
+			flags.precision += 1;
+		while (flags.width-- > ft_count_len(n) && flags.width >= flags.precision)
 			size += ft_putchar(' ');
 	}
 	return (size);

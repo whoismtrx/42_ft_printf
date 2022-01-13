@@ -3,8 +3,8 @@
 int main()
 {
 	int a = 10;
-	int i = ft_printf("%01.d", 0);
+	int i = ft_printf("%020.10d", -42000);
 	printf("\n");
-	int j = printf("%01.d", 0);
+	int j = printf("%020.10d", -42000);
 	printf("\n%d\n%d", i, j);
 }

@@ -6,7 +6,7 @@
 /*   By: orekabe <orekabe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 01:16:53 by orekabe           #+#    #+#             */
-/*   Updated: 2022/01/13 05:47:40 by orekabe          ###   ########.fr       */
+/*   Updated: 2022/01/13 23:33:43 by orekabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,34 +15,28 @@
 
 static t_flags	ft_get_width_n(t_flags flags, long long n)
 {
-	if (flags.precision >= ft_count_len(n))
-	{
-		if (flags.width > flags.precision && n < 0)
-			flags.width -= (flags.precision + 1);
-		else if (flags.width > flags.precision)
-			flags.width -= flags.precision;
-		else if (flags.width > flags.precision && n == 0)
-			flags.width = flags.width;
-		else
-			flags.width = 0;
-	}
-	else
-	{
-		if (flags.width > ft_count_len(n) && !flags.dot)
-			flags.width -= ft_count_len(n);
-		else if (flags.width == flags.precision)
-			flags.width = 0;
-		else if (flags.width > ft_count_len(n) && n == 0 && flags.dot)
-			flags.width = flags.width;
-		else if (flags.width && !flags.precision && n == 0 && flags.dot)
-			flags.width = flags.width;
-		else if (flags.width < ft_count_len(n))
-			flags.width = 0;
-		else if (flags.width >= ft_count_len(n) && n == 0 && !flags.precision && flags.dot)
-			flags.width = flags.width;
-		else if (flags.width >= ft_count_len(n))
-			flags.width -= ft_count_len(n);
-	}
+	// int	old_width;
+
+	// old_width = flags.width;
+	// if (flags.dot)
+	// {
+	// 	if (flags.precision <= ft_count_len(n) && flags.precision > 0)
+	// 		flags.width = flags.width - ft_count_len(n);
+	// 	else if (flags.width == ft_count_len(n) && n != 0)
+	// 		flags.width = 0;
+	// 	else
+	// 		flags.width = flags.width - flags.precision;
+	// }
+	// if (flags.width < ft_count_len(n) && old_width < ft_count_len(n))
+	// 	flags.width = 0;
+	// else if (flags.width >= ft_count_len(n) && n < 0 && flags.dot && flags.precision >= ft_count_len(n))
+	// 	flags.width -= 1;
+	// else if (!flags.dot)
+	// 	flags.width = flags.width - ft_count_len(n);
+	if (flags.width < flags.precision || flags.width < ft_count_len(n))
+		flags.width = 0;
+	if (flags.width > flags.precision && flags.precision > ft_count_len(n) && n < 0)
+		flags.width -= 1;
 	return (flags);
 }
 
@@ -103,23 +97,31 @@ static t_flags	ft_get_width_n(t_flags flags, long long n)
 
 int	ft_putnnbr(long long n, t_flags flags)
 {
-	int	size;
-	int	boool;
+	int			size;
+	int			boool;
+	long long	nbr;
 	
 	size = 0;
 	boool = 1;
+	nbr	= n;
 	flags = ft_get_width_n(flags, n);
+	// printf("prec1=%d\n", flags.precision);
+	if (boool == 1 && !flags.minus && flags.precision)
+	{
+		size += ft_fill_space(flags, nbr);
+		boool = 0;
+	}
 	if (n < 0 && (flags.dot || flags.zero))
 	{
 		size += ft_putchar('-');
 		n *= -1;
 	}
-	if (boool == 1 && !flags.minus)
+	if (boool == 1 && !flags.minus && !flags.precision)
 	{
-		size += ft_fill_space(flags, n);
+		size += ft_fill_space(flags, nbr);
 		boool = 0;
 	}
-	size += ft_fill_zero(flags);
+	// size += ft_fill_zero(flags, nbr);
 	size += ft_fill_prec(flags, n);
 	if (flags.dot && n == 0 && !flags.precision)
 		boool = boool + 1 - 1;
@@ -128,6 +130,6 @@ int	ft_putnnbr(long long n, t_flags flags)
 	else
 		size += ft_putnbr(n);
 	if (boool == 1 && flags.minus)
-		size += ft_fill_space(flags, n);	
+		size += ft_fill_space(flags, nbr);	
 	return (size);
 }
