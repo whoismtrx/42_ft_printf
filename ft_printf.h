@@ -6,7 +6,7 @@
 /*   By: orekabe <orekabe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 17:38:15 by orekabe           #+#    #+#             */
-/*   Updated: 2022/01/12 05:58:10 by orekabe          ###   ########.fr       */
+/*   Updated: 2022/01/13 05:28:55 by orekabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,12 @@ int		ft_putnnbr(long long n, t_flags flags);
 int		ft_putunbr(long long n, t_flags flags);
 int		ft_putnhex(unsigned long n, char c, t_flags flags);
 int		ft_putnadd(unsigned long n, char c, t_flags flags);
-int		ft_fill(t_flags flags);
+int		ft_fill_space(t_flags flags, long long n);
+int		ft_fill_zero(t_flags flags);
+int		ft_fill_prec(t_flags flags, long long n);
+int		ft_count_len(long long n);
 int		ft_atoi(const char *str);
 int		ft_strlen(const char *s);
+int		ft_isdigit(int c);
 
 #endif
