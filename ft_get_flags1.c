@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_flags1.c                                  :+:      :+:    :+:   */
+/*   ft_get_flags1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: orekabe <orekabe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 21:17:23 by orekabe           #+#    #+#             */
-/*   Updated: 2022/01/15 04:05:40 by orekabe          ###   ########.fr       */
+/*   Updated: 2022/01/15 22:29:30 by orekabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ t_flags	ft_get_flags1(const char *format, t_flags flags)
 	int	i;
 
 	i = 0;
-	if ((format[i] == '0') && !(ft_isdigit(format[i - 1])))
+	if ((format[i] == '0') && !(ft_isdigit(format[i - 1]))
+		&& format[i - 1] != '.')
 		flags.zero = 1;
 	if (format[i] == '-')
 	{

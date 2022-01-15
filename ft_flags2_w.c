@@ -1,38 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_plus.c                                    :+:      :+:    :+:   */
+/*   ft_flags2_w.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: orekabe <orekabe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/18 20:45:01 by orekabe           #+#    #+#             */
-/*   Updated: 2022/01/15 17:59:20 by orekabe          ###   ########.fr       */
+/*   Created: 2021/12/18 15:42:36 by orekabe           #+#    #+#             */
+/*   Updated: 2022/01/15 20:22:50 by orekabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_check_plus(const char *format, int arg)
+int	ft_flags2_w(char c)
 {
-	int	i;
-	int	boool;
-	int	size;
-
-	i = 0;
-	boool = 0;
-	size = 0;
-	while (format[i] != '%')
-	{
-		if (format[i] == '+' && arg >= 0)
-		{
-			size += ft_putchar('+');
-			return (size);
-		}
-		else if (format[i] == ' ' && arg >= 0)
-			boool = 1;
-		i--;
-	}
-	if (boool)
-		size += ft_putchar(' ');
-	return (size);
+	if (c == '+' || c == ' ' || c == '#')
+		return (1);
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }

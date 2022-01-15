@@ -6,7 +6,7 @@
 /*   By: orekabe <orekabe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 17:38:15 by orekabe           #+#    #+#             */
-/*   Updated: 2022/01/15 04:44:36 by orekabe          ###   ########.fr       */
+/*   Updated: 2022/01/15 20:23:15 by orekabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_flags	ft_get_flags1(const char *format, t_flags flags);
 int		ft_check_flags(char c);
 int		ft_flags1(char c);
 int		ft_flags2(char c);
+int		ft_flags2_w(char c);
 int		ft_check_specifier(char c);
 int		ft_check_decimal(char c);
 int		ft_check_hexa(char c);

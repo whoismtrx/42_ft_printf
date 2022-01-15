@@ -6,7 +6,7 @@
 /*   By: orekabe <orekabe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 05:52:27 by orekabe           #+#    #+#             */
-/*   Updated: 2022/01/15 03:56:43 by orekabe          ###   ########.fr       */
+/*   Updated: 2022/01/15 22:10:29 by orekabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static	int	ft_fill_width1(t_flags flags, long long n, int base)
 	int	size;
 
 	size = 0;
-	if (flags.zero && n != 0)
+	if (flags.zero && n != 0 && !flags.precision && !flags.dot)
 	{
 		while (flags.width-- > ft_count_len(n, base))
 			size += ft_putchar('0');
