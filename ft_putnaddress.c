@@ -6,7 +6,7 @@
 /*   By: orekabe <orekabe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 22:01:48 by orekabe           #+#    #+#             */
-/*   Updated: 2022/01/12 02:20:13 by orekabe          ###   ########.fr       */
+/*   Updated: 2022/01/14 20:05:33 by orekabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static	int	ft_count_lenadd(unsigned long n)
 {
-	int		len;
+	int				len;
 	unsigned long	nbr;
-	
+
 	len = 0;
 	nbr = n;
 	if (nbr == 0)
@@ -56,7 +56,7 @@ static t_flags	ft_get_width_add(t_flags flags, int len)
 	return (flags);
 }
 
-static int ft_putlenadd(int precision, int len)
+static int	ft_putlenadd(int precision, int len)
 {
 	int	size;
 	int	zero;
@@ -70,6 +70,7 @@ static int ft_putlenadd(int precision, int len)
 	}
 	return (size);
 }
+
 int	ft_putnadd(unsigned long n, char c, t_flags flags)
 {
 	int				size;

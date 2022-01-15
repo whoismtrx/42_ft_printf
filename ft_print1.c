@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_flags.c                                   :+:      :+:    :+:   */
+/*   ft_print1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: orekabe <orekabe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/11 05:04:52 by orekabe           #+#    #+#             */
-/*   Updated: 2022/01/14 20:01:40 by orekabe          ###   ########.fr       */
+/*   Created: 2022/01/14 20:27:32 by orekabe           #+#    #+#             */
+/*   Updated: 2022/01/14 20:28:04 by orekabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_check_flags(char c)
+int	ft_print1(const char *format, va_list ptr, t_flags flags)
 {
-	if (c == '-' || c == '.' || c == '0')
-		return (1);
-	if (c == '+' || c == ' ' || c == '#')
-		return (1);
-	return (0);
+	int		i;
+	int		size;
+
+	i = 0;
+	size = 0;
+	if (ft_check_specifier(format[i]))
+		size += ft_conversion1(&format[i], size, ptr, flags);
+	return (size);
 }

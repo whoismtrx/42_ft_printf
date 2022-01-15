@@ -6,7 +6,7 @@
 /*   By: orekabe <orekabe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 05:52:27 by orekabe           #+#    #+#             */
-/*   Updated: 2022/01/12 23:36:36 by orekabe          ###   ########.fr       */
+/*   Updated: 2022/01/14 20:03:07 by orekabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static int	ft_fill_after(t_flags flags)
 	int	size;
 
 	size = 0;
-	
 	if (flags.minus)
 	{
 		while (flags.width-- > 0)

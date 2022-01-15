@@ -6,7 +6,7 @@
 /*   By: orekabe <orekabe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 17:38:15 by orekabe           #+#    #+#             */
-/*   Updated: 2022/01/14 04:44:57 by orekabe          ###   ########.fr       */
+/*   Updated: 2022/01/15 04:44:36 by orekabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 # include <unistd.h>
 # include <stdarg.h>
-# include <stdio.h>
+# include <limits.h>
+
 typedef struct s_flags
 {
 	int	width;
@@ -33,12 +34,16 @@ typedef struct s_sandb
 }				t_sandb;
 
 int		ft_printf(const char *format, ...);
-int		ft_conversion1(const char *format, int size, va_list ptr, t_flags flags);
+int		ft_print1(const char *format, va_list ptr, t_flags flags);
+int		ft_print2(const char *format, va_list ptr);
+int		ft_conversion1(const char *format, int size, va_list ptr,
+			t_flags flags);
 int		ft_conversion2(const char *format, va_list ptr);
 int		ft_check_after_percentage(const char *format, va_list ptr);
+t_flags	ft_get_flags1(const char *format, t_flags flags);
 int		ft_check_flags(char c);
-t_flags	ft_check_flags1(const char *format, t_flags flags);
-int		ft_check_flags2(char c);
+int		ft_flags1(char c);
+int		ft_flags2(char c);
 int		ft_check_specifier(char c);
 int		ft_check_decimal(char c);
 int		ft_check_hexa(char c);
@@ -56,9 +61,9 @@ int		ft_putnnbr(long long n, t_flags flags);
 int		ft_putunbr(long long n, t_flags flags);
 int		ft_putnhex(unsigned long n, char c, t_flags flags);
 int		ft_putnadd(unsigned long n, char c, t_flags flags);
-int		ft_fill_width(t_flags flags, long long n);
-int		ft_fill_prec(t_flags flags, long long n);
-int		ft_count_len(long long n);
+int		ft_fill_width(t_flags flags, long long n, int base);
+int		ft_fill_prec(t_flags flags, long long n, int base);
+int		ft_count_len(long long n, int base);
 int		ft_atoi(const char *str);
 int		ft_strlen(const char *s);
 int		ft_isdigit(int c);
