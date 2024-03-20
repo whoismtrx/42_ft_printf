@@ -62,4 +62,4 @@ ft_printf function supports the following conversion specifiers, width and flags
 
 you can find some resources about the project in the following links:
 - `variadic functions`: this is a great video about [variadic functions](https://www.youtube.com/watch?v=oDC208zvsdg&t=5s&ab_channel=CodeVault) and how to use them in C.
-- `printf`: this is a great article about [printf](https://docs.oracle.com/cd/E26502_01/html/E28556/gkxbc.html) and how to use it in C, also you can read this pdf [Secrets of printf](https://inst.eecs.berkeley.edu/~cs61c/fa19/hw/hw2/printf_colton.pdf) to understand how printf works.
+- `printf`: this is a great article about [printf](https://docs.oracle.com/cd/E26502_01/html/E28556/gkxbc.html), also you can read this pdf [Secrets of printf](https://inst.eecs.berkeley.edu/~cs61c/fa19/hw/hw2/printf_colton.pdf) to understand how printf works.
