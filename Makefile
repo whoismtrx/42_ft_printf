@@ -16,28 +16,41 @@ CFLAGS = -Wall -Wextra -Werror
 
 NAME = libftprintf.a
 
-HEADER = ft_printf.h
+HEADER = -I./include
 
-SRC =	ft_printf.c ft_putchar.c ft_putstr.c ft_putnbr.c ft_puthex.c ft_putaddress.c ft_fill_width.c ft_fill_prec.c \
-		ft_conversion1.c ft_conversion2.c ft_check_after_percentage.c ft_flags2.c ft_check_specifier.c ft_isdigit.c ft_flags2_w.c \
-		ft_check_hash.c ft_check_plus.c ft_check_decimal.c ft_check_hexa.c ft_check_flags.c ft_get_flags1.c ft_print1.c ft_print2.c \
-		ft_putnchar.c ft_putnstr.c ft_putnnbr.c ft_putunbr.c ft_putnhex.c ft_putnaddress.c ft_atoi.c ft_strlen.c ft_count_len.c ft_flags1.c
+SRCD = ./src
 
-OBJ = $(SRC:.c=.o)
+OBJD = ./objs
+
+SRC =	$(SRCD)/ft_printf.c $(SRCD)/ft_putchar.c $(SRCD)/ft_putstr.c $(SRCD)/ft_putnbr.c $(SRCD)/ft_puthex.c $(SRCD)/ft_putaddress.c $(SRCD)/ft_fill_width.c $(SRCD)/ft_fill_prec.c \
+		$(SRCD)/ft_conversion1.c $(SRCD)/ft_conversion2.c $(SRCD)/ft_flags2.c $(SRCD)/ft_check_specifier.c $(SRCD)/ft_isdigit.c $(SRCD)/ft_flags2_w.c $(SRCD)/ft_print1.c $(SRCD)/ft_print2.c \
+		$(SRCD)/ft_check_hash.c $(SRCD)/ft_check_plus.c $(SRCD)/ft_check_decimal.c $(SRCD)/ft_check_hexa.c $(SRCD)/ft_check_flags.c $(SRCD)/ft_get_flags1.c $(SRCD)/ft_strlen.c $(SRCD)/ft_count_len.c \
+		$(SRCD)/ft_putnchar.c $(SRCD)/ft_putnstr.c $(SRCD)/ft_putnnbr.c $(SRCD)/ft_putunbr.c $(SRCD)/ft_putnhex.c $(SRCD)/ft_putnaddress.c $(SRCD)/ft_atoi.c  $(SRCD)/ft_flags1.c $(SRCD)/ft_check_after_percentage.c
+
+OBJ = $(addprefix $(OBJD)/, $(notdir $(SRC:.c=.o)))
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	ar -rc $(NAME) $(OBJ)
+	@ar -rc $(NAME) $^
+	@echo "███████╗████████╗     ██████╗ ██████╗ ██╗███╗   ██╗████████╗███████╗"
+	@echo "██╔════╝╚══██╔══╝     ██╔══██╗██╔══██╗██║████╗  ██║╚══██╔══╝██╔════╝"
+	@echo "█████╗     ██║        ██████╔╝██████╔╝██║██╔██╗ ██║   ██║   █████╗  "
+	@echo "██╔══╝     ██║        ██╔═══╝ ██╔══██╗██║██║╚██╗██║   ██║   ██╔══╝"
+	@echo "██║        ██║███████╗██║     ██║  ██║██║██║ ╚████║   ██║   ██║   "
+	@echo "╚═╝        ╚═╝╚══════╝╚═╝     ╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝   ╚═╝   ╚═╝  "
+	@echo "                   BY: MTRX         "
 
-%.o: %.c $(HEADER)
-	$(CC) -c $(CFLAGS) $<
+$(OBJD)/%.o: $(SRCD)/%.c
+	@mkdir -p $(OBJD)
+	@printf "Compiling $<\r"
+	@$(CC) -c $(CFLAGS) $(HEADER) $< -o $@
 
 clean:
-	rm -rf $(OBJ)
+	rm -rf $(OBJD)
 
 fclean: clean
-	rm -rf $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
 
